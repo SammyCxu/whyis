@@ -1,17 +1,27 @@
 import os, osproc, strutils, strformat, tables
 
 
-# I've seperated the steps so it is easier to determine which part does what.
+# Seperated the steps so it is easier to determine which part does what. For contributors.
+
+let dataDir = "/usr/share/whyis"
 
 # Load Symptoms
 var symptomsTable = initTable[string, tuple[collector: string, rules: string]]()
 
-for line in lines("symptoms.db"):
-  let l = line.strip()
-  if l.len == 0 or l[0] == '#': continue
-  let parts = l.split("|")
-  if parts.len < 3: continue
-  symptomsTable[parts[0].strip()] = (collector: parts[1].strip(), rules: parts[2].strip())
+let symptomsPath = dataDir / "symptoms.db"
+
+try:
+  for line in lines(symptomsPath):
+    let l = line.strip()
+    if l.len == 0 or l[0] == '#': continue
+    let parts = l.split("|")
+    if parts.len < 3: continue
+    symptomsTable[parts[0].strip()] =
+      (collector: dataDir / parts[1].strip(),
+       rules: dataDir / parts[2].strip())
+except OSError:
+  echo "Error: cannot open symptoms.db"
+  quit(1)
 
 
 # Args
