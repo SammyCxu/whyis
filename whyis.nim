@@ -1,13 +1,8 @@
 import os, osproc, strutils, strformat, tables
 
-
-# Seperated the steps so it is easier to determine which part does what. For contributors.
-
 let dataDir = "/usr/share/whyis"
 
-# Load Symptoms
 var symptomsTable = initTable[string, tuple[collector: string, rules: string]]()
-
 let symptomsPath = dataDir / "symptoms.db"
 
 try:
@@ -23,13 +18,19 @@ except OSError:
   echo "Error: cannot open symptoms.db"
   quit(1)
 
-
-# Args
 if paramCount() < 1:
-  echo "Usage: whyis <symptom>"
+  echo "Usage: whyis <symptom> | -l | --list"
   quit(1)
 
-let symptom = paramStr(1)
+let arg = paramStr(1)
+
+if arg in ["-l", "--list"]:
+  echo "Available symptoms:"
+  for key in symptomsTable.keys:
+    echo " - ", key
+  quit(0)
+
+let symptom = arg
 echo fmt"Running whyis for symptom: {symptom}"
 
 if not symptomsTable.contains(symptom):
@@ -39,8 +40,6 @@ if not symptomsTable.contains(symptom):
 let collector = symptomsTable[symptom].collector
 let ruleFile = symptomsTable[symptom].rules
 
-
-# Get outputs of collectors
 var output = ""
 try:
   output = execProcess(collector, options={poStdErrToStdOut})
@@ -48,10 +47,7 @@ except OSError as e:
   echo fmt"Error running collector: {e.msg}"
   quit(1)
 
-
-# Parse outputs into somewhat facts
 var facts = initTable[string, string]()
-
 for line in output.splitLines():
   let l = line.strip()
   if l.contains("power_save"):
@@ -62,8 +58,6 @@ for line in output.splitLines():
     if parts.len >= 2:
       facts["signal_dbm"] = parts[1].strip()
 
-
-# Load rules
 var rules: seq[string] = @[]
 try:
   for l in lines(ruleFile):
@@ -72,8 +66,6 @@ except OSError:
   echo fmt"Cannot open rules file: {ruleFile}"
   quit(1)
 
-
-# Determine likely causes
 echo "\nLikely causes and suggested fixes:"
 
 var anyMatched = false
@@ -102,8 +94,19 @@ for r in rules:
     if condParts.len == 2:
       let key = condParts[0].strip()
       let threshold = parseInt(condParts[1].strip())
-      if facts.contains(key) and parseInt(facts[key]) < threshold:
-        matched = true
+      if facts.contains(key):
+        let rawValue = facts[key].strip()
+        var intValue = 0
+        var ok = false
+        for part in rawValue.split():
+          try:
+            intValue = parseInt(part)
+            ok = true
+            break
+          except ValueError:
+            continue
+        if ok and intValue < threshold:
+          matched = true
 
   if matched:
     anyMatched = true
