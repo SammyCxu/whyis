@@ -4,11 +4,11 @@ set -eu
 REPO_URL="https://github.com/xZepyx/whyis.git"
 TMP_DIR="/tmp/whyis-install"
 BIN_NAME="whyis"
-TARGET="/usr/bin/$BIN_NAME"
+BIN_TARGET="/usr/bin/$BIN_NAME"
+DATA_DIR="/usr/share/whyis"
 
 printf "Do you want to install whyis? (y/N): "
-
-if ! read -r ans </dev/tty; then
+if ! read ans </dev/tty; then
   echo "Aborted."
   exit 1
 fi
@@ -21,41 +21,25 @@ case "$ans" in
     ;;
 esac
 
-
-echo "==> Preparing temporary directory"
 rm -rf "$TMP_DIR"
-mkdir -p "$TMP_DIR"
-
-echo "==> Cloning repository"
 git clone "$REPO_URL" "$TMP_DIR"
-
 cd "$TMP_DIR"
 
-echo "==> Checking for Nim"
 if ! command -v nim >/dev/null 2>&1; then
   echo "Nim is not installed."
-  echo "Please install Nim first:"
-  echo "  https://nim-lang.org/install.html"
   exit 1
 fi
 
-NIM_BIN="$(command -v nim)"
+nim c -d:release whyis.nim
 
-echo "==> Compiling whyis"
-"$NIM_BIN" c -d:release whyis.nim
+sudo mkdir -p "$DATA_DIR"
+sudo cp symptoms.db "$DATA_DIR/"
+sudo cp -r collectors "$DATA_DIR/"
+sudo cp -r rules "$DATA_DIR/"
 
-if [ ! -f "$BIN_NAME" ]; then
-  echo "Build failed: binary not found"
-  exit 1
-fi
+sudo mv whyis "$BIN_TARGET"
+sudo chmod +x "$BIN_TARGET"
 
-echo "==> Installing to $TARGET"
-sudo mv "$BIN_NAME" "$TARGET"
-sudo chmod +x "$TARGET"
-
-echo "==> Cleaning up"
-cd /
 rm -rf "$TMP_DIR"
 
-echo "==> whyis installed successfully"
-echo "Run: whyis \"wifi slow\""
+echo "whyis installed successfully"
