@@ -1,0 +1,1 @@
+suspend_state!=mem | Suspend not working properly | Check kernel parameters or ACPI settings

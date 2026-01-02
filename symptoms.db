@@ -1,0 +1,21 @@
+# This is the main symptoms database you can add more symptoms here if you are looking at this code.
+# .db means database btw imw
+# Format: symptom_name|collector_path|rules_path
+
+slow-wifi|collectors/wifi.sh|rules/wifi.rules
+wifi-slow|collectors/wifi.sh|rules/wifi.rules
+slow-internet|collectors/wifi.sh|rules/wifi.rules
+high-cpu|collectors/cpu.sh|rules/cpu.rules
+cpu-overload|collectors/cpu.sh|rules/cpu.rules
+cpu-high-load|collectors/cpu.sh|rules/cpu.rules
+wifi-disconnects|collectors/wifi.sh|rules/wifi.rules
+wifi-drops|collectors/wifi.sh|rules/wifi.rules
+audio-crackling|collectors/audio.sh|rules/audio.rules
+audio-noise|collectors/audio.sh|rules/audio.rules
+audio-low|collectors/audio.sh|rules/audio.rules
+audio-distortion|collectors/audio.sh|rules/audio.rules
+audio-cutting|collectors/audio.sh|rules/audio.rules
+suspend-failing|collectors/suspend.sh|rules/suspend.rules
+sleep-issue|collectors/suspend.sh|rules/suspend.rules
+suspend-fails|collectors/suspend.sh|rules/suspend.rules
+suspend-wakeup-fail|collectors/suspend.sh|rules/suspend.rules

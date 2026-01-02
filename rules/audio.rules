@@ -1,0 +1,2 @@
+volume<20 | Audio too low | Increase volume or check mixer settings
+volume<10 | Audio extremely low | Check audio drivers or hardware

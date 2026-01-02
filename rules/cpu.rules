@@ -1,0 +1,2 @@
+idle<20 | CPU is overloaded | Close heavy apps or investigate processes
+idle<10 | CPU critically overloaded | Kill processes or reboot
