@@ -7,7 +7,10 @@ BIN_NAME="whyis"
 TARGET="/usr/bin/$BIN_NAME"
 
 printf "Do you want to install whyis? (y/N): "
-read ans || exit 1
+if ! read ans </dev/tty; then
+  echo "Aborted."
+  exit 1
+fi
 
 case "$ans" in
   y|Y) ;;
