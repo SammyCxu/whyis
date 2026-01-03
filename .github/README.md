@@ -23,8 +23,13 @@ whyis/
 ## Installion
 
 
-**Run this in your terminal:**
+**Use aur:**
+```bash
+yay -S whyis
 ```
+
+**Or:**
+```bash
 curl -fsSL https://raw.githubusercontent.com/xZepyx/whyis/main/install.sh | sh
 ```
 
