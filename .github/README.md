@@ -26,9 +26,11 @@ whyis/
 **Use aur:**
 ```bash
 yay -S whyis
+#or
+yay -S whyis-git
 ```
 
-**Or:**
+**Build from source::**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/xZepyx/whyis/main/install.sh | sh
 ```
